@@ -3,6 +3,10 @@ import os
 import json
 import google.generativeai as genai
 from flask_cors import CORS
+from dotenv import load_dotenv
+
+# Load the .env file from the root folder
+load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
 
 app = Flask(__name__)
 CORS(app)
@@ -96,5 +100,3 @@ def health_check():
 if __name__ == '__main__':
     print("\n=== Starting Interview Server ===")
     app.run(port=5001, debug=True)
-
-# Path: backend/google/generativeai.py  
