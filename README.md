@@ -1,4 +1,4 @@
-# she-builds-ai-chatbot
+# Text-Based Interview Chatbot Using Gemini API
 
 Welcome to the Interactive Text-Based Interview Chatbot! This application uses the Gemini API to generate responses for interview questions in real-time.
 
