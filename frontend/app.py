@@ -6,6 +6,11 @@ import os
 # Load environment variables from .env
 load_dotenv()
 
+# Access the Gemini API Key
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+if not GEMINI_API_KEY:
+    st.error("Gemini API key not found. Please check your .env file.")
+
 # Streamlit Page Configuration
 st.set_page_config(
     page_title="Interactive Mock Interview",
@@ -46,7 +51,8 @@ if st.button("Submit"):
         st.warning("Please provide a response before submitting.")
     else:
         response_data = {
-            "user_response": user_response
+            "user_response": user_response,
+            "gemini_api_key": GEMINI_API_KEY  # Add API key to the payload if needed by the backend
         }
         
         st.write("Sending request to Flask server...")  # Debug feedback
@@ -65,7 +71,7 @@ if st.button("Submit"):
                 else:
                     st.session_state.current_prompt = next_question  # Update the prompt
                     st.session_state.user_response = ""  # Clear the response area
-                    st.rerun()  # Rerun to refresh the page
+                    st.rerun()  # Rerun to refresh the page and clear the input
             else:
                 st.error("Error processing response. Please check the server log for more information.")
                 st.write(f"Response content: {res.text}")  # Print the response content for debugging
