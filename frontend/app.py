@@ -1,15 +1,14 @@
 import streamlit as st
 import requests
-from dotenv import load_dotenv
-import os
 
-# Load environment variables from .env
-load_dotenv()
+# Access the Gemini and Google API keys from Streamlit secrets
+GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
+GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
 
-# Access the Gemini API Key
-GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 if not GEMINI_API_KEY:
-    st.error("Gemini API key not found. Please check your .env file.")
+    st.error("Gemini API key not found. Please check your Streamlit secrets.")
+if not GOOGLE_API_KEY:
+    st.error("Google API key not found. Please check your Streamlit secrets.")
 
 # Streamlit Page Configuration
 st.set_page_config(
@@ -89,3 +88,4 @@ if st.button("Reset Interview"):
         st.rerun()
     except Exception as e:
         st.error(f"Error resetting interview: {str(e)}")
+
